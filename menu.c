@@ -1,4 +1,5 @@
 #include "menu.h"
+
 int getUserEnter(const char* userTitle) {
     int userEnter;
     printf("%s \n:::", userTitle);
@@ -10,10 +11,10 @@ int getUserEnter(const char* userTitle) {
 void menuPrintFile(DynamicString* path) {
     FILE* file;
     if (!(file = fopen(path->string, "rb"))) {
-        printf("Error! File not open\n");
+        printf("Oops, sorry but we could not open the file, write something to it, then it will be automatically created!\n");
         return;
     }
-    printFile(file);
+    printAllFileContent(file);
     printf("\n");
     fclose(file);
 }
@@ -24,9 +25,9 @@ void menuGetInt(DynamicString *path) {
         printf("Error! File not open\n");
         return;
     }
-    int i = getUserEnter("Enter the id of number you want to see");
+    int index = getUserEnter("Enter the id of number you want to see");
 
-    int result = getInt(i, file);
+    int result = getIntElementInIndex(index, file);
     printf("Result: %i\n", result);
 
     fclose(file);
@@ -35,13 +36,13 @@ void menuGetInt(DynamicString *path) {
 void menuSetInt(DynamicString *path) {
     FILE* file;
     if (!(file = fopen(path->string, "r+b"))) {
-        printf("Error! File not open\n");
+        printf("Oops, we were unable to get read / write access to the file\n");
         return;
     }
-    int i = getUserEnter("Enter the id");
-    int num = getUserEnter("Enter new number");
+    int index = getUserEnter("Enter the element index");
+    int num = getUserEnter("Enter number");
 
-    setInt(num, i, file);
+    setIntElementInIndex(num, index, file);
 
     fclose(file);
     printf("Profit\n");

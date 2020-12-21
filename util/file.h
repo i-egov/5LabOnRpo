@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void printFile(FILE* file);
-int getInt(int i, FILE* file);
-int setInt(int num, int i, FILE* file);
+void printAllFileContent(FILE* file); // Вывод всего контента файла
+int getIntElementInIndex(int elementID, FILE* file); // Получение элемента по индексу
+int setIntElementInIndex(int num, int elementID, FILE* file); // Запись элемента по индексу
 
 #endif
