@@ -34,11 +34,11 @@ void menuGetInt(DynamicString *path) {
 
 void menuSetInt(DynamicString *path) {
     FILE* file;
-    if (!(file = fopen(path->string, "ab"))) {
+    if (!(file = fopen(path->string, "r+b"))) {
         printf("Error! File not open\n");
         return;
     }
-    int i = getUserEnter("Enter the id of number you want to set");
+    int i = getUserEnter("Enter the id");
     int num = getUserEnter("Enter new number");
 
     setInt(num, i, file);
@@ -55,12 +55,11 @@ DynamicString* getPath() {
 }
 
 int printMainMenu() {
-    printf("=======Super Puper Menu=======\n");
-    printf("1. Set path\n");
-    printf("2. Print all content\n");
-    printf("3. Get int\n");
-    printf("4. Set int\n");
-    printf("5. Exit\n");
+    printf("=======Super-Puper Menu=======\n");
+    printf("1. Print all content\n");
+    printf("2. Get int\n");
+    printf("3. Set int\n");
+    printf("4. Exit\n");
     return getUserEnter("Select element");
 }
 
@@ -68,19 +67,15 @@ void menu(DynamicString *path) {
     int userEnterMenu = printMainMenu();
     switch (userEnterMenu) {
         case 1:
-            freeString(path);
-            path = getPath();
-            break;
-        case 2:
             menuPrintFile(path);
             break;
-        case 3:
+        case 2:
             menuGetInt(path);
             break;
-        case 4:
+        case 3:
             menuSetInt(path);
             break;
-        case 5:
+        case 4:
             printf("Bye!\n");
             exit(0);
         default:
